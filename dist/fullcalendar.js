@@ -7135,10 +7135,15 @@ $.extend(TimeGrid.prototype, {
 
 			axisHtml =
 				'<td class="fc-axis fc-time ' + view.widgetContentClass + '" ' + view.axisStyleAttr() + '>' +
-					((!slotNormal || !minutes) ? // if irregular slot duration, or on the hour, then display the time
+					((!slotNormal || minutes === 0 || minutes === 30) ? // if irregular slot duration, or on the hour, then display the time
 						'<span>' + // for matchCellWidths
-							htmlEscape(calendar.formatDate(slotDate, view.opt('axisFormat'))) +
+							calendar.formatDate(slotDate, view.opt('axisFormat')) +
 						'</span>' :
+						//'<span><span class="hours">' + // for matchCellWidths
+						//	htmlEscape(calendar.formatDate(slotDate, view.opt('axisFormat')).substr(0, calendar.formatDate(slotDate, view.opt('axisFormat')).indexOf(":"))) +
+						//'</span><span class="minutes">' + // for matchCellWidths
+						//	htmlEscape(calendar.formatDate(slotDate, view.opt('axisFormat')).substr(calendar.formatDate(slotDate, view.opt('axisFormat')).indexOf(":")).replace(":", " ")) +
+						//'</span></span>':
 						''
 						) +
 				'</td>';
